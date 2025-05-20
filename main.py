@@ -28,14 +28,26 @@ async def main():
         return
 
     rows = tbody.find_all('tr')  # assuming <thead> is separate
+    
     events = []
     for row in rows:
         cells = row.find_all('td')
         if len(cells) < 2:
             continue
-        name = cells[0].get_text(strip=True)
+
+        a = cells[0].find('a', href=True)
+        name = a.get_text(strip=True)
+        link = a['href']
+        # if you want the full URL:
+        full_link = f"https://liftingcast.com{link}"
+
         date = cells[1].get_text(strip=True)
-        events.append({'name': name, 'date': date})
+        events.append({
+            'name': name,
+            'date': date,
+            'link': full_link
+        })
+
 
     # 4) Filter to only those on the first date
     if events:
@@ -44,7 +56,7 @@ async def main():
 
     # 5) Print
     for e in events:
-        print(f"{e['name']} — {e['date']}")
+        print(f"{e['name']} | {e['date']} | {e['link']}")
 
 if __name__ == '__main__':
     asyncio.run(main())
