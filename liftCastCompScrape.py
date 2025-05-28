@@ -1,7 +1,6 @@
 import asyncio
 from crawl4ai import AsyncWebCrawler
 from bs4 import BeautifulSoup
-from scrapeLiftcastUrl import scrapeResult
 
 '''
 performs datascraping on the initial lifting cast page and enters the competition which is selected

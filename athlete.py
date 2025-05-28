@@ -17,6 +17,9 @@ class athlete():
         self.bestDead = 0
         self.bestBench = 0
         
+    def __repr__(self):
+        return f"athlete(name'{self.name}',team = {self.team}', isMale = {self.isMale} , weight = {self.weight})"
+        
     def setWeight(self,kgs):
         '''
         sets athletes weight and places them in their weight class
