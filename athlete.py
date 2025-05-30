@@ -1,7 +1,6 @@
 class athlete():
     '''
-    a class created to store athlete information requiring name,team, and sex to be able to accurately represent them
-    due to weight being on a different table on lifting cast we cant have weight on init
+    takes in athlete name , team , and sex to be able to build an accurate athlete list
     
     '''
        
@@ -11,11 +10,11 @@ class athlete():
         self.isMale = sex
         self.Class = 0
         self.weight = 0
-        self.total = 0
-        self.gl = 0
         self.bestSquat = 0
         self.bestDead = 0
         self.bestBench = 0
+        self.total = 0
+        self.gl = 0
         
     def __repr__(self):
         return f"athlete(name'{self.name}',team = {self.team}', isMale = {self.isMale} , weight = {self.weight})"
@@ -68,12 +67,15 @@ class athlete():
         '''
         return self.Class
     
-    def getTotal(self):
+    def setTotal(self):
         '''
         returns the total of the athlete
         '''
         total = self.bestBench+self.bestDead+self.bestSquat
-        return total
+        self.total = total
+
+    def getTotal(self):
+        return self.total
     
     def updateBest(self,lift,attempt,isGood):
         """
@@ -93,6 +95,7 @@ class athlete():
                     self.bestSquat = attempt
                 
             self.calcGlPts()
+            self.setTotal()
             
     def calcGlPts(self):
         weight = self.weight
