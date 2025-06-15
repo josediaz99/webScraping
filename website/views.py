@@ -5,7 +5,7 @@ from . import db
 import json
 from liftCastCompScrape import fetchEvents
 import asyncio
-
+from scrapeAthletes import getAthletes
 views = Blueprint('views',__name__)
 
 @views.route('/', methods=['GET', 'POST'])
@@ -17,3 +17,9 @@ def home():
     else:
         flash(f'Found events!', category='success')
     return render_template("home.html", user=current_user, events=events)
+
+@views.route('/competitions')
+def showAthletes():
+    link = request.args.get('link')
+    athletes = getAthletes(link)
+    return render_template('home.html' , athletes = athletes)
